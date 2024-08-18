@@ -29,6 +29,13 @@ resource "aws_security_group" "main" {
     ipv6_cidr_blocks = ["::/0"]
   }
 }
+resource "aws_docdb_cluster_parameter_group" "main" {
+  family      = "docdb4.0"
+  name        =  "${local.name_prefix}-parameter-group"
+  description =  "${local.name_prefix}-parameter-group"
+
+  tags = merge(local.tags, {Name = "${local.name_prefix}-parameter-group"})
+}
 
 resource "aws_docdb_cluster" "main" {
   cluster_identifier      = "${local.name_prefix}-cluster"
@@ -40,6 +47,7 @@ resource "aws_docdb_cluster" "main" {
   skip_final_snapshot     = var.skip_final_snapshot
   db_subnet_group_name = aws_docdb_subnet_group.main.name
   vpc_security_group_ids = [aws_security_group.main.id]
+  db_cluster_parameter_group_name = aws_docdb_cluster_parameter_group.main.name
   tags = merge(local.tags, {Name = "${local.name_prefix}-cluster"})
 }
 
