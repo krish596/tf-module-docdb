@@ -4,9 +4,9 @@ resource "aws_docdb_subnet_group" "main" {
 
   tags = merge(local.tags, {Name = "${local.name_prefix}-subnet-group"})
 }
-#
+
 # resource "aws_docdb_cluster" "docdb" {
-#   cluster_identifier      = "my-docdb-cluster"
+#   cluster_identifier      = "${local.name_prefix}-cluster"
 #   engine                  = "docdb"
 #   master_username         = "foo"
 #   master_password         = "mustbeeightchars"
