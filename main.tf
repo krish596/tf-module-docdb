@@ -18,7 +18,7 @@ resource "aws_security_group" "main" {
     to_port          = 27017
     protocol         = "tcp"
     cidr_blocks      = var.sg_ingress_cidr
-    ipv6_cidr_blocks = ["::/0"]
+
   }
 
   egress {
